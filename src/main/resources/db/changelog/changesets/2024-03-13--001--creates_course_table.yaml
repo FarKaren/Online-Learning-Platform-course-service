@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - logicalFilePath: changesets/2024-03-13--002--create_course_table.yaml
+  - changeSet:
+      id: create-courses
+      author: Karen
+      changes:
+        - createTable:
+            tableName: courses
+            schemaName: courseservice
+            columns:
+              - column:
+                  name: course_id
+                  type: uuid
+                  constraints:
+                    defaultValueComputed: 'uuid_generate_v4()'
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: added
+                  type: timestamp with time zone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_at
+                  type: timestamp with time zone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: deleted_at
+                  type: timestamp with time zone
+              - column:
+                  name: deleted_hash
+                  type: uuid
+

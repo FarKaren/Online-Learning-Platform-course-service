@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - logicalFilePath: changesets/2024-03-13--002--create_courses-schedule_table.yaml
+  - changeSet:
+      id: create-courses_schedule
+      author: Karen
+      changes:
+        - createTable:
+            tableName: courses_schedule
+            schemaName:  courseservice
+            columns:
+              - column:
+                  name: course_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: fk_course_id_course-schedule
+                    references: courses (course_id)
+                    nullable: false
+              - column:
+                  name: course_title
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lesson_date
+                  type: timestamp with time zone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reschedule_to_date
+                  type: timestamp with time zone
+              - column:
+                  name: deleted_at
+                  type: timestamp with time zone
+              - column:
+                  name: deleted_hash
+                  type: uuid
+            constraints:
+              - uniqueConstraint:
+                  constraintName: course_id_date_idx
+                  columnNames: course_id, date
