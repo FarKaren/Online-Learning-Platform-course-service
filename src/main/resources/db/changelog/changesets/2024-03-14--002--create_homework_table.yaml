@@ -1,0 +1,53 @@
+databaseChangeLog:
+  - logicalFilePath: changesets/2024-03-14--002--create_homeworks_table.yaml
+  - changeSet:
+      id: create-homeworks
+      author: Karen
+      changes:
+        - createTable:
+            tableName: homeworks
+            schemaName: courseservice
+            columns:
+              - column:
+                  name: homework_id
+                  type: uuid
+                  constraints:
+                    defaultValueComputed: 'uuid_generate_v4()'
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: course_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: student_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: teacher_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: on_review
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: completed
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: added
+                  type: timestamp with time zone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: deleted_at
+                  type: timestamp with time zone
+              - column:
+                  name: deleted_hash
+                  type: uuid
