@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/course/homework")
+@RequestMapping("/course/homework")
 @Validated
 @RequiredArgsConstructor
 public class HomeworkController {
