@@ -19,6 +19,7 @@ public class HomeworkMapper {
                 .studentId(homework.getStudent().getId())
                 .teacherId(homework.getTeacher().getId())
                 .vebinarId(homework.getVebinar().getId())
+                .added(homework.getAdded())
                 .content(homework.getContent())
                 .completeStatus(homework.getCompleteStatus())
                 .build();
