@@ -2,8 +2,8 @@ package org.otus.platform.courseservice.mapper;
 
 import org.otus.platform.courseservice.dto.homework.HomeworkCreateRequest;
 import org.otus.platform.courseservice.dto.homework.HomeworkDto;
-import org.otus.platform.courseservice.dto.homework.HomeworkUpdateRequest;
-import org.otus.platform.courseservice.model.Homework;
+import org.otus.platform.courseservice.model.homework.CompleteStatus;
+import org.otus.platform.courseservice.model.homework.Homework;
 import org.otus.platform.courseservice.model.course.Course;
 import org.otus.platform.courseservice.model.user.User;
 import org.springframework.stereotype.Component;
@@ -17,7 +17,8 @@ public class HomeworkMapper {
                 .course(homework.getCourse().getId())
                 .student(homework.getStudent().getId())
                 .teacher(homework.getTeacher().getId())
-                .onReview(homework.isOnReview())
+                .content(homework.getContent())
+                .completeStatus(homework.getCompleteStatus())
                 .build();
     }
 
@@ -26,7 +27,8 @@ public class HomeworkMapper {
                 .course(course)
                 .student(student)
                 .teacher(teacher)
-                .onReview(request.onReview())
+                .content(request.content())
+                .completeStatus(CompleteStatus.InProgress)
                 .build();
     }
 }

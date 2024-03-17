@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - logicalFilePath: changesets/2024-03-15--001--add_column_content_to_homework.yaml
+  - changeSet:
+      id: add-content-to-homework
+      author: Karen
+      changes:
+        - addColumn:
+            tableName: homeworks
+            columns:
+              - column:
+                  name: content
+                  type: text
+                  constraints:
+                    nullable: false

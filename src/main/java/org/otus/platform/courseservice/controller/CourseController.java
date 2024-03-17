@@ -26,13 +26,13 @@ public class CourseController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/list/{userId}")
+    @GetMapping("/list/{id}")
     ResponseEntity<CourseListDto> getCoursesByUser(@NotNull @PathVariable UUID id) {
         var response = courseService.getCoursesByUser(id);
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/users/{courseId}")
+    @GetMapping("/users/{id}")
     ResponseEntity<CourseUserListDto> getUsersByCourse(@NotNull @PathVariable UUID id) {
         var response = courseService.getUsersByCourse(id);
         return ResponseEntity.ok(response);
@@ -47,6 +47,12 @@ public class CourseController {
     @PutMapping("/update")
     ResponseEntity<CourseDto> updateCourse(@Valid @RequestBody UpdateCourseRequest request) {
         var response = courseService.updateCourse(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/join")
+    ResponseEntity<CourseDto> joinToCourse(@Valid @RequestBody JoinToCourseRequest request) {
+        var response = courseService.joinToCourse(request);
         return ResponseEntity.ok(response);
     }
 

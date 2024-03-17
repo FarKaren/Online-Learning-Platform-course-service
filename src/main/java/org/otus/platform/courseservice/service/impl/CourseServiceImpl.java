@@ -8,6 +8,7 @@ import org.otus.platform.courseservice.mapper.CourseMapper;
 import org.otus.platform.courseservice.model.course.CourseUser;
 import org.otus.platform.courseservice.repository.CourseRepository;
 import org.otus.platform.courseservice.repository.CourseUserRepository;
+import org.otus.platform.courseservice.repository.UserRepository;
 import org.otus.platform.courseservice.service.CourseService;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ public class CourseServiceImpl implements CourseService {
     private final CourseRepository courseRepository;
     private final CourseMapper courseMapper;
     private final CourseUserRepository courseUserRepository;
+    private final UserRepository userRepository;
 
     @Override
     public CourseDto getCourseById(UUID id) {
@@ -68,6 +70,22 @@ public class CourseServiceImpl implements CourseService {
         course.setStartAt(request.startAt());
         var updatedCourse = courseRepository.save(course);
         return courseMapper.toCourseDto(updatedCourse);
+    }
+
+    @Override
+    public CourseDto joinToCourse(JoinToCourseRequest request) {
+        log.info("invoke joinToCourse() method");
+        var course = courseRepository.findByIdAndDeletedHashIsNull(request.courseId())
+                .orElseThrow(() -> new EntityNotFoundException("Course with id: " + request.courseId() + "not found"));
+        var user = userRepository.findByIdAndDeletedHashIsNull(request.userId())
+                .orElseThrow(() -> new EntityNotFoundException("User with id: " + request.userId() + "not found"));
+        var courseUser = CourseUser.builder()
+                .user(user)
+                .course(course)
+                .userType(request.userType())
+                .build();
+        courseUserRepository.save(courseUser);
+        return courseMapper.toCourseDto(course);
     }
 
     @Override

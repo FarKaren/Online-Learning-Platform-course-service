@@ -13,6 +13,6 @@ public record HomeworkCreateRequest(
         @NotNull
         UUID teacherId,
         @NotNull
-        Boolean onReview
+        String content
 ) {
 }

@@ -19,25 +19,26 @@ databaseChangeLog:
                   name: course_id
                   type: uuid
                   constraints:
+                    foreignKeyName: fk_course_id_homework
+                    references: courses (course_id)
                     nullable: false
               - column:
                   name: student_id
                   type: uuid
                   constraints:
+                    foreignKeyName: fk_student_id_users
+                    references: userservice.users (user_id)
                     nullable: false
               - column:
                   name: teacher_id
                   type: uuid
                   constraints:
+                    foreignKeyName: fk_teacher_id_users
+                    references: userservice.users (user_id)
                     nullable: false
               - column:
-                  name: on_review
-                  type: boolean
-                  constraints:
-                    nullable: false
-              - column:
-                  name: completed
-                  type: boolean
+                  name: complete_status
+                  type: varchar(10)
                   constraints:
                     nullable: false
               - column:
