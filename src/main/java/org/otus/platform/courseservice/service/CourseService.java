@@ -10,5 +10,6 @@ public interface CourseService {
     CourseUserListDto getUsersByCourse(UUID id);
     CourseDto createCourse(CreateCourseRequest request);
     CourseDto updateCourse(UpdateCourseRequest request);
+    CourseDto joinToCourse(JoinToCourseRequest request);
     void deleteCourse(UUID id);
 }

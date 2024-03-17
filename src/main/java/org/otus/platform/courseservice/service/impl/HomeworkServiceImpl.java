@@ -6,7 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.otus.platform.courseservice.dto.homework.HomeworkCreateRequest;
 import org.otus.platform.courseservice.dto.homework.HomeworkDto;
 import org.otus.platform.courseservice.dto.homework.HomeworkUpdateRequest;
+import org.otus.platform.courseservice.dto.homework.UpdateHomeworkStatusRequest;
 import org.otus.platform.courseservice.mapper.HomeworkMapper;
+import org.otus.platform.courseservice.model.homework.CompleteStatus;
 import org.otus.platform.courseservice.repository.CourseRepository;
 import org.otus.platform.courseservice.repository.HomeworkRepository;
 import org.otus.platform.courseservice.repository.UserRepository;
@@ -68,7 +70,17 @@ public class HomeworkServiceImpl implements HomeworkService {
                     .orElseThrow(() -> new EntityNotFoundException("Student with id: " + request.teacherId() + " not found"));
             homework.setTeacher(teacher);
         }
-        homework.setOnReview(request.onReview());
+        homework.setCompleteStatus(CompleteStatus.InProgress);
+        var savedHomework = homeworkRepository.save(homework);
+        return mapper.toHomeworkDto(savedHomework);
+    }
+
+    @Override
+    public HomeworkDto updateHomeworkStatus(UpdateHomeworkStatusRequest request) {
+        log.info("invoke updateHomeworkStatus() method");
+        var homework = homeworkRepository.findByIdAndDeletedHashIsNull(request.homeworkId())
+                .orElseThrow(() -> new EntityNotFoundException("Homework with id: " + request.homeworkId() + " not found"));
+        homework.setCompleteStatus(request.completeStatus());
         var savedHomework = homeworkRepository.save(homework);
         return mapper.toHomeworkDto(savedHomework);
     }

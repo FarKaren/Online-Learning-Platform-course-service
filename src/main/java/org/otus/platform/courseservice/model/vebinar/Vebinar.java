@@ -1,8 +1,7 @@
-package org.otus.platform.courseservice.model;
+package org.otus.platform.courseservice.model.vebinar;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 import org.otus.platform.courseservice.model.course.Course;
 import org.otus.platform.courseservice.model.user.User;
 
@@ -14,32 +13,34 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "homeworks")
-public class Homework {
+@Table(name = "vebinar")
+public class Vebinar {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "homework_id", nullable = false)
+    @Column(name = "id", nullable = false)
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "course_id", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "course_id",  nullable = false)
     private Course course;
-
-    @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
-    private User student;
 
     @ManyToOne
     @JoinColumn(name = "teacher_id", nullable = false)
     private User teacher;
 
-    @Column(name = "on_review", nullable = false)
-    private boolean onReview;
+    @Column(name = "title", nullable = false)
+    private String title;
 
-    @CreationTimestamp
-    @Column(name = "added", nullable = false)
-    private ZonedDateTime added;
+    @Column(name = "lesson_date", nullable = false)
+    private ZonedDateTime lessonDate;
+
+    @Column(name = "summary", nullable = false)
+    private String summary;
+
+
+    @Column(name = "task")
+    private String  task;
 
     @Column(name = "deleted_at")
     private ZonedDateTime deletedAt;

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.otus.platform.courseservice.dto.homework.HomeworkCreateRequest;
 import org.otus.platform.courseservice.dto.homework.HomeworkDto;
 import org.otus.platform.courseservice.dto.homework.HomeworkUpdateRequest;
+import org.otus.platform.courseservice.dto.homework.UpdateHomeworkStatusRequest;
 import org.otus.platform.courseservice.service.HomeworkService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,5 +45,11 @@ public class HomeworkController {
     ResponseEntity<Void> deleteHomework(@NotNull @PathVariable UUID id) {
         homeworkService.deleteHomework(id);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("/update/homework/status")
+    ResponseEntity<HomeworkDto> updateHomeworkStatus(@Valid @RequestBody UpdateHomeworkStatusRequest request) {
+        var response = homeworkService.updateHomeworkStatus(request);
+        return ResponseEntity.ok(response);
     }
 }
