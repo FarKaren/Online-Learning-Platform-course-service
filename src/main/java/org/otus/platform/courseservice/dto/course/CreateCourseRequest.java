@@ -11,6 +11,8 @@ public record CreateCourseRequest(
         @NotNull
         BigDecimal price,
         @NotNull
-        ZonedDateTime startAt
+        ZonedDateTime startAt,
+        @NotNull
+        ZonedDateTime endAt
 ) {
 }

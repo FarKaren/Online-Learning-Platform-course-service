@@ -9,9 +9,10 @@ import java.util.UUID;
 @Builder
 public record HomeworkDto(
         UUID id,
-        UUID course,
-        UUID student,
-        UUID teacher,
+        UUID courseId,
+        UUID studentId,
+        UUID teacherId,
+        UUID vebinarId,
         CompleteStatus completeStatus,
         ZonedDateTime added,
         String content

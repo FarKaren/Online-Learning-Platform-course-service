@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.otus.platform.courseservice.model.course.Course;
 import org.otus.platform.courseservice.model.user.User;
+import org.otus.platform.courseservice.model.vebinar.Vebinar;
 
 import java.time.ZonedDateTime;
 import java.util.UUID;
@@ -29,6 +30,10 @@ public class Homework {
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
     private User student;
+
+    @ManyToOne
+    @JoinColumn(name = "vebinar_id", nullable = false)
+    private Vebinar vebinar;
 
     @ManyToOne
     @JoinColumn(name = "teacher_id", nullable = false)

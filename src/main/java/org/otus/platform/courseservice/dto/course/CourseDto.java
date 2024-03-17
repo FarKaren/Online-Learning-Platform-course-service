@@ -12,6 +12,7 @@ public record CourseDto(
         String title,
         BigDecimal price,
         ZonedDateTime added,
-        ZonedDateTime startAt
+        ZonedDateTime startAt,
+        ZonedDateTime endAt
 ) {
 }

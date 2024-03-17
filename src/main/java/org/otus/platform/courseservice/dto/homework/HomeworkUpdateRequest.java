@@ -16,6 +16,8 @@ public record HomeworkUpdateRequest(
         @NotNull
         UUID teacherId,
         @NotNull
+        UUID vebinarId,
+        @NotNull
         String content
 ) {
 }

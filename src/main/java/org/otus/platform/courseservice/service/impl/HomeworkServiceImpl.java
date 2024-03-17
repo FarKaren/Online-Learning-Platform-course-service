@@ -12,8 +12,10 @@ import org.otus.platform.courseservice.model.homework.CompleteStatus;
 import org.otus.platform.courseservice.repository.CourseRepository;
 import org.otus.platform.courseservice.repository.HomeworkRepository;
 import org.otus.platform.courseservice.repository.UserRepository;
+import org.otus.platform.courseservice.repository.VebinarRepository;
 import org.otus.platform.courseservice.service.HomeworkService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
 import java.util.UUID;
@@ -27,7 +29,9 @@ public class HomeworkServiceImpl implements HomeworkService {
     private final CourseRepository courseRepository;
     private final UserRepository userRepository;
     private final HomeworkMapper mapper;
+    private final VebinarRepository vebinarRepository;
 
+    @Transactional
     @Override
     public HomeworkDto getHomeworkById(UUID id) {
         log.info("invoke getHomeworkById() method");
@@ -36,6 +40,7 @@ public class HomeworkServiceImpl implements HomeworkService {
         return mapper.toHomeworkDto(homework);
     }
 
+    @Transactional
     @Override
     public HomeworkDto createHomework(HomeworkCreateRequest request) {
         log.info("invoke createHomework() method");
@@ -45,11 +50,14 @@ public class HomeworkServiceImpl implements HomeworkService {
                 .orElseThrow(() -> new EntityNotFoundException("Student with id: " + request.studentId() + " not found"));
         var teacher = userRepository.findByIdAndDeletedHashIsNull(request.teacherId())
                 .orElseThrow(() -> new EntityNotFoundException("Student with id: " + request.teacherId() + " not found"));
-        var homework = mapper.toHomework(request, course, student, teacher);
+        var vebinar = vebinarRepository.findByIdAndDeletedHashIsNull(request.vebinarId())
+                .orElseThrow(() -> new EntityNotFoundException("Student with id: " + request.vebinarId() + " not found"));
+        var homework = mapper.toHomework(request, course, student, teacher, vebinar);
         var savedHomework = homeworkRepository.save(homework);
         return mapper.toHomeworkDto(savedHomework);
     }
 
+    @Transactional
     @Override
     public HomeworkDto updateHomework(HomeworkUpdateRequest request) {
         log.info("invoke updateHomework() method");
@@ -70,11 +78,17 @@ public class HomeworkServiceImpl implements HomeworkService {
                     .orElseThrow(() -> new EntityNotFoundException("Student with id: " + request.teacherId() + " not found"));
             homework.setTeacher(teacher);
         }
+        if(homework.getVebinar().getId() != request.vebinarId()) {
+            var vebinar = vebinarRepository.findByIdAndDeletedHashIsNull(request.vebinarId())
+                    .orElseThrow(() -> new EntityNotFoundException("Student with id: " + request.vebinarId() + " not found"));
+            homework.setVebinar(vebinar);
+        }
         homework.setCompleteStatus(CompleteStatus.InProgress);
         var savedHomework = homeworkRepository.save(homework);
         return mapper.toHomeworkDto(savedHomework);
     }
 
+    @Transactional
     @Override
     public HomeworkDto updateHomeworkStatus(UpdateHomeworkStatusRequest request) {
         log.info("invoke updateHomeworkStatus() method");
@@ -85,6 +99,7 @@ public class HomeworkServiceImpl implements HomeworkService {
         return mapper.toHomeworkDto(savedHomework);
     }
 
+    @Transactional
     @Override
     public void deleteHomework(UUID id) {
         log.info("invoke deleteHomework() method");

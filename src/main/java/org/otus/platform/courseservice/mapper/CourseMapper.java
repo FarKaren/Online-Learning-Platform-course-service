@@ -19,6 +19,7 @@ public class CourseMapper {
                 .price(course.getPrice())
                 .added(course.getAdded())
                 .startAt(course.getStartAt())
+                .endAt(course.getEndAt())
                 .build();
     }
 
@@ -27,6 +28,7 @@ public class CourseMapper {
                 .title(request.title())
                 .price(request.price())
                 .startAt(request.startAt())
+                .endAt(request.endAt())
                 .build();
     }
 
