@@ -35,6 +35,9 @@ public class Course {
     @Column(name = "start_at", nullable = false)
     private ZonedDateTime startAt;
 
+    @Column(name = "end_at", nullable = false)
+    private ZonedDateTime endAt;
+
     @Column(name = "deleted_at")
     private ZonedDateTime deletedAt;
 

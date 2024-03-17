@@ -24,31 +24,31 @@ public class VebinarController {
     private final VebinarService vebinarService;
 
     @GetMapping("/list/{id}")
-    ResponseEntity<VebinarListDto> getCourseScheduleListByCourse(@NotNull @PathVariable UUID id) {
+    ResponseEntity<VebinarListDto> getVebinarListByCourse(@NotNull @PathVariable UUID id) {
         var response = vebinarService.getVebinarListByCourse(id);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<VebinarDto> getCourseScheduleById(@NotNull @PathVariable UUID id) {
+    ResponseEntity<VebinarDto> getCVebinarById(@NotNull @PathVariable UUID id) {
         var response = vebinarService.getVebinarById(id);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/create")
-    ResponseEntity<VebinarDto> createCourseSchedule(@Valid @RequestBody VebinarCreateRequest request) {
+    ResponseEntity<VebinarDto> createVebinar(@Valid @RequestBody VebinarCreateRequest request) {
         var response = vebinarService.createVebinar(request);
         return ResponseEntity.ok(response);
     }
 
     @PutMapping("/update")
-    ResponseEntity<VebinarDto> updateCourseSchedule(@Valid @RequestBody VebinarUpdateRequest request) {
+    ResponseEntity<VebinarDto> updateVebinar(@Valid @RequestBody VebinarUpdateRequest request) {
         var response = vebinarService.updateVebinar(request);
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<Void> deleteScheduleById(@NotNull @PathVariable UUID id) {
+    ResponseEntity<Void> deleteVebinarById(@NotNull @PathVariable UUID id) {
         vebinarService.deleteVebinar(id);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }

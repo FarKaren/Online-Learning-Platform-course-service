@@ -6,6 +6,7 @@ import org.otus.platform.courseservice.model.homework.CompleteStatus;
 import org.otus.platform.courseservice.model.homework.Homework;
 import org.otus.platform.courseservice.model.course.Course;
 import org.otus.platform.courseservice.model.user.User;
+import org.otus.platform.courseservice.model.vebinar.Vebinar;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,19 +15,21 @@ public class HomeworkMapper {
     public HomeworkDto toHomeworkDto(Homework homework) {
         return HomeworkDto.builder()
                 .id(homework.getId())
-                .course(homework.getCourse().getId())
-                .student(homework.getStudent().getId())
-                .teacher(homework.getTeacher().getId())
+                .courseId(homework.getCourse().getId())
+                .studentId(homework.getStudent().getId())
+                .teacherId(homework.getTeacher().getId())
+                .vebinarId(homework.getVebinar().getId())
                 .content(homework.getContent())
                 .completeStatus(homework.getCompleteStatus())
                 .build();
     }
 
-    public Homework toHomework(HomeworkCreateRequest request, Course course, User student, User teacher) {
+    public Homework toHomework(HomeworkCreateRequest request, Course course, User student, User teacher, Vebinar vebinar) {
         return Homework.builder()
                 .course(course)
                 .student(student)
                 .teacher(teacher)
+                .vebinar(vebinar)
                 .content(request.content())
                 .completeStatus(CompleteStatus.InProgress)
                 .build();

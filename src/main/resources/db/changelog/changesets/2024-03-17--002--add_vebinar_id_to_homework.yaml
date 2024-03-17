@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - logicalFilePath: changesets/2024-03-17--002--add_vebinar_id_to_homework.yaml
+  - changeSet:
+      id: add_vebinar_id_to_homework
+      author: Karen
+      changes:
+        - addColumn:
+            tableName: homeworks
+            columns:
+              - column:
+                  name: vebinar_id
+                  type: uuid
+                  constraints:
+                    foreignKeyName: fk_vebinar_id_homeworks
+                    references: vebinars (id)
+                    nullable: false

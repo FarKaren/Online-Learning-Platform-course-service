@@ -14,6 +14,8 @@ public record UpdateCourseRequest(
         @NotNull
         BigDecimal price,
         @NotNull
-        ZonedDateTime startAt
+        ZonedDateTime startAt,
+        @NotNull
+        ZonedDateTime endAt
 ) {
 }

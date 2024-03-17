@@ -11,6 +11,7 @@ import org.otus.platform.courseservice.repository.CourseUserRepository;
 import org.otus.platform.courseservice.repository.UserRepository;
 import org.otus.platform.courseservice.service.CourseService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -26,6 +27,7 @@ public class CourseServiceImpl implements CourseService {
     private final CourseUserRepository courseUserRepository;
     private final UserRepository userRepository;
 
+    @Transactional
     @Override
     public CourseDto getCourseById(UUID id) {
         log.info("invoke getCourseById() method");
@@ -34,6 +36,7 @@ public class CourseServiceImpl implements CourseService {
         return courseMapper.toCourseDto(course);
     }
 
+    @Transactional
     @Override
     public CourseListDto getCoursesByUser(UUID id) {
         log.info("invoke getCoursesByUser() method");
@@ -43,6 +46,7 @@ public class CourseServiceImpl implements CourseService {
         return new CourseListDto(courseDtoList);
     }
 
+    @Transactional
     @Override
     public CourseUserListDto getUsersByCourse(UUID id) {
         log.info("invoke getUsersByCourse() method");
@@ -52,6 +56,7 @@ public class CourseServiceImpl implements CourseService {
         return new CourseUserListDto(userDtoList);
     }
 
+    @Transactional
     @Override
     public CourseDto createCourse(CreateCourseRequest request) {
         log.info("invoke createCourse() method");
@@ -60,6 +65,7 @@ public class CourseServiceImpl implements CourseService {
         return courseMapper.toCourseDto(savedCourse);
     }
 
+    @Transactional
     @Override
     public CourseDto updateCourse(UpdateCourseRequest request) {
         log.info("invoke updateCourse() method");
@@ -72,6 +78,7 @@ public class CourseServiceImpl implements CourseService {
         return courseMapper.toCourseDto(updatedCourse);
     }
 
+    @Transactional
     @Override
     public CourseDto joinToCourse(JoinToCourseRequest request) {
         log.info("invoke joinToCourse() method");
@@ -88,6 +95,7 @@ public class CourseServiceImpl implements CourseService {
         return courseMapper.toCourseDto(course);
     }
 
+    @Transactional
     @Override
     public void deleteCourse(UUID id) {
         log.info("invoke deleteCourse() method");

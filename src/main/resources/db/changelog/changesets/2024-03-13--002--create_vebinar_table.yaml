@@ -5,7 +5,7 @@ databaseChangeLog:
       author: Karen
       changes:
         - createTable:
-            tableName: vebinar
+            tableName: vebinars
             schemaName:  courseservice
             columns:
               - column:

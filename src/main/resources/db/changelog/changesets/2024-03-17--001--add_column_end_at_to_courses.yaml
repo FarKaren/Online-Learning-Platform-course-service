@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - logicalFilePath: changesets/2024-03-17--001--add_column_end_at_to_courses.yaml
+  - changeSet:
+      id: add-end_at-to-course
+      author: Karen
+      changes:
+        - addColumn:
+            tableName: courses
+            columns:
+              - column:
+                  name: end_at
+                  type: timestamp with time zone
+                  constraints:
+                    nullable: false

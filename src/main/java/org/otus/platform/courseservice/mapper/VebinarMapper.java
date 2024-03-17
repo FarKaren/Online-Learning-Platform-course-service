@@ -31,7 +31,7 @@ public class VebinarMapper {
     public Vebinar toVebinar(VebinarCreateRequest dto, Course course, User teacher) {
         return Vebinar.builder()
                 .course(course)
-                .title(course.getTitle())
+                .title(dto.title())
                 .lessonDate(dto.lessonDate())
                 .summary(dto.summary())
                 .teacher(teacher)
